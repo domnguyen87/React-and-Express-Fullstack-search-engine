@@ -191,6 +191,18 @@ const page_change = (page) => {
    }
  }
 
+const handleSearch = (event) => {
+   setState({posts_search: []});
+   const search_query = event.target.value
+   axios.get('/api/get/searchpost', {params: {search_query: search_query} })
+     .then(res => res.data.length !== 0
+                    ? setState({posts_search: [...res.data]})
+                    : null )
+     .catch(function (error) {
+       console.log(error);
+       })
+   }
+
 
 
 return(
