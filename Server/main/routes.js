@@ -178,7 +178,7 @@ router.get('/api/get/searchpost', (req, res, next) => {
 
 //Save posts to db
 router.post('/api/post/posttodb', (req, res, next) => {
-  const body_vector = String(req.body.body)
+  const para_vector = String(req.body.body)
   const title_vector = String(req.body.title)
   const username_vector = String(req.body.username)
 
