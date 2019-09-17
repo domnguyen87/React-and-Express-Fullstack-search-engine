@@ -182,17 +182,24 @@ router.post('/api/post/posttodb', (req, res, next) => {
   const title_vector = String(req.body.title)
   const username_vector = String(req.body.username)
 
-  const search_vector = [title_vector, body_vector, username_vector]
-  const values = [req.body.title, req.body.body, search_vector, req.body.uid, req.body.username]
+  const search_array = [title_vector,
+                         body_vector, 
+                         username_vector]
+  
+  const values = [req.body.title, 
+                  req.body.body, 
+                  search_array, 
+                  req.body.uid, 
+                  req.body.username]
+  
   pool.query(`INSERT INTO
-              posts(title, body, search_vector, user_id, author, date_created)
+              posts(title, body, search_array, user_id, author, date_created)
               VALUES($1, $2, to_tsvector($3), $4, $5, NOW())`,
     values, (q_err, q_res) => {
     if (q_err) return next(q_err);
     res.json(q_res.rows);
   });
 });
-
 
 /* Retrieve another users profile from db based on username */
 router.get('/api/get/otheruserprofilefromdb', (req, res, next) => {
