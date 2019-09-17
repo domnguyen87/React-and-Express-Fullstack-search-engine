@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var pool = require('./db')
-
+asd
 
 /*
     POSTS ROUTES SECTION
